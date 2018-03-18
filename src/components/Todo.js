@@ -27,7 +27,7 @@ const Todo = ({ description, createdAt, id, onRemoveTodo, onEditTodo }) => (
 		<input type="checkbox" />
 		<span>{description}</span> <span>{createdAt}</span>
 		<Button onClick={() => onRemoveTodo(id)}>Remove</Button>
-		<Button onClick={() => onEditTodo(id)}>Edit</Button>
+		<Button onClick={() => onEditTodo({ id })}>Edit</Button>
 		<Button>Need a list?</Button>
 	</Li>
 );

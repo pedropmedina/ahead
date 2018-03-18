@@ -4,16 +4,6 @@ import Todo from './Todo';
 import TodoAddForm from './TodoAddForm';
 import styled from 'styled-components';
 
-const MainWrapper = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	padding: 2rem;
-	max-width: 80%;
-	margin: 3rem auto;
-	width: 100%;
-`;
-
 const Ul = styled.ul`
 	list-style: none;
 	padding: 1rem;
@@ -21,8 +11,7 @@ const Ul = styled.ul`
 
 const TodoList = props => {
 	return (
-		<MainWrapper>
-			<TodoAddForm onSubmit={props.onSubmit} onSelectDay={props.onSelectDay} />
+		<div>
 			<Ul>
 				{props.todos
 					.map(({ description, createdAt, id }) => {
@@ -51,10 +40,11 @@ const TodoList = props => {
 						);
 					})
 					.filter(todo => {
+						if (props.today) return todo.props.createdAt === props.today;
 						return todo.props.createdAt === props.selectDay;
 					})}
 			</Ul>
-		</MainWrapper>
+		</div>
 	);
 };
 

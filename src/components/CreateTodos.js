@@ -1,15 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { addTodo, removeTodo, editTodo } from '../actions/todo';
+import {
+	setSelectDay,
+	setIdToEdit,
+	setIsEditable,
+} from '../actions/editability';
 import TodosList from './TodosList';
+import TodoAddForm from './TodoAddForm';
+
+//////
+////// styles
+//////
+const MainWrapper = styled.div`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	padding: 2rem;
+	max-width: 80%;
+	margin: 3rem auto;
+	width: 100%;
+`;
 
 class CreateTodos extends React.Component {
-	state = {
-		isEditable: false,
-		id: null,
-		selectDay: '',
-	};
-
 	// add todo to the store
 	onSubmit = todo => {
 		this.props.dispatch(addTodo(todo));
@@ -22,25 +36,28 @@ class CreateTodos extends React.Component {
 
 	// handle UI on edit todo
 	onEditTodo = id => {
-		this.setState(() => ({ isEditable: !this.state.isEditable, id }));
+		this.props.dispatch(setIdToEdit(id));
+		this.props.dispatch(setIsEditable());
 	};
 
 	// edit todo from store
 	onSubmitEditTodo = (id, updates) => {
 		this.props.dispatch(editTodo(id, updates));
-		this.setState(() => ({ isEditable: !this.state.isEditable, id: null }));
+		this.props.dispatch(setIsEditable());
+		this.props.dispatch(setIdToEdit({ id: null }));
 	};
 
 	// handle selectDay
 	onSelectDay = day => {
 		const selectDay = day;
-		this.setState(() => ({ selectDay }));
+		this.props.dispatch(setSelectDay(selectDay));
 	};
 
 	render() {
-		const { isEditable, id, selectDay } = this.state;
+		const { isEditable, id, selectDay } = this.props.editability;
 		return (
-			<div>
+			<MainWrapper>
+				<TodoAddForm onSubmit={this.onSubmit} onSelectDay={this.onSelectDay} />
 				<TodosList
 					editableId={id}
 					isEditable={isEditable}
@@ -52,13 +69,14 @@ class CreateTodos extends React.Component {
 					onRemoveTodo={this.onRemoveTodo}
 					onSelectDay={this.onSelectDay}
 				/>
-			</div>
+			</MainWrapper>
 		);
 	}
 }
 
 const MapStateToProps = state => ({
 	todos: state.todos,
+	editability: state.editability,
 });
 
 export default connect(MapStateToProps)(CreateTodos);

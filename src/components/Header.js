@@ -6,13 +6,15 @@ import styled from 'styled-components';
 const HeaderTag = styled.header`
 	position: relative;
 	background-color: #b74255;
+	padding: 3rem 2rem;
 `;
 
+/*
 const Logo = styled.h1`
 	position: absolute;
 	left: 2rem;
-	top: 25%;
-	transform: translateY(-25%);
+	top: 17%;
+	transform: translateY(-17%);
 	font-size: 3rem;
 	color: #b74255;
 	background-color: #fff;
@@ -22,13 +24,14 @@ const Logo = styled.h1`
 	text-align: center;
 	line-height: 1.5;
 `;
+*/
 
 const Nav = styled.nav`
-	background-color: #fff;
+	/* background-color: #fff; */
 	font-size: 1.6rem;
 	text-transform: uppercase;
 	width: 100%;
-	padding: 2rem 1rem 1rem 1rem;
+	padding: 1rem 1rem 1rem 1rem;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -40,16 +43,16 @@ const Nav = styled.nav`
 `;
 
 const NavItem = styled(NavLink)`
-	color: #b74255;
+	color: #fff;
 	text-decoration: none;
 	letter-spacing: 0.1rem;
-	border: 0.2rem solid #b74255;
+	border: 0.2rem solid #fff;
 	padding: 1rem 2rem;
 `;
 
 const TodayDate = styled.h2`
 	font-size: 3rem;
-	padding: 4rem;
+	padding: 1rem 1rem 3rem 1rem;
 	text-align: center;
 	color: #fff;
 	font-weight: 500;
@@ -58,7 +61,7 @@ const TodayDate = styled.h2`
 const Header = () => {
 	return (
 		<HeaderTag>
-			<Logo>↠</Logo>
+			{/* <Logo>↠</Logo> */}
 			<TodayDate>{moment().format('dddd, MMMM Do, YYYY')}</TodayDate>
 			<Nav>
 				<NavItem exact to="/">

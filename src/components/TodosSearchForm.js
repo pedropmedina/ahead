@@ -16,6 +16,7 @@ const Input = styled.input`
 
 	&::placeholder {
 		color: #efb6bf;
+		font-style: italic;
 	}
 `;
 
@@ -24,7 +25,7 @@ const TodosSearchForm = props => (
 		<Input
 			type="text"
 			value={props.searchTerm}
-			placeholder="Search..."
+			placeholder="Search by Date or todo's description..."
 			onChange={props.onSearchTodo}
 		/>
 	</div>

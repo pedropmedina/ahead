@@ -3,19 +3,19 @@ import moment from 'moment';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import styled from 'styled-components';
 import '../style.css';
+import validationAtFormLevel from '../helpers/validationAtFormLevel';
 
 import MomentLocaleUtils, {
 	formatDate,
 	parseDate,
 } from 'react-day-picker/moment';
 
-//
-// Styles
-//
+//////
+////// Styles
+//////
 const Form = styled.form`
 	display: flex;
 	flex-wrap: wrap;
-	/* width: 50%; */
 	font-size: 1.6rem;
 	padding: 1rem;
 
@@ -45,10 +45,19 @@ const Button = styled.button`
 	font-size: 2rem;
 `;
 
+const ErrorSpan = styled.span`
+	color: red;
+	font-weight: bold;
+`;
+
+//////
+////// Component
+//////
 class TodoAddForm extends React.Component {
 	state = {
 		description: this.props.description || '',
-		createdAt: this.props.createdAt || '',
+		createdAt: this.props.createdAt || undefined,
+		fieldErrors: {},
 	};
 
 	// handle the description
@@ -57,26 +66,36 @@ class TodoAddForm extends React.Component {
 		this.setState(() => ({ description }));
 	};
 
-	// handle submit for both when editing or adding todo
-	onSubmit = e => {
-		e.preventDefault();
-		if (this.props.onSubmitEditTodo) {
-			this.props.onSubmitEditTodo(this.props.id, { ...this.state });
-		} else {
-			this.props.onSubmit({ ...this.state });
-			this.setState(() => ({ description: '', createdAt: undefined }));
-		}
-	};
-
 	// handle created at
-	handleCreatedAt = day => {
-		const createdAt = moment(day).format('dddd, MMMM Do, YYYY');
+	onDayPickerChange = day => {
+		let createdAt;
+		if (day) createdAt = moment(day).format('dddd, MMMM Do, YYYY');
 		if (this.props.isEditable) {
 			this.setState(() => ({ createdAt }));
 			return;
 		}
 		this.setState(() => ({ createdAt }));
 		this.props.onSelectDay(createdAt);
+	};
+
+	// handle submit for both when editing or adding todo
+	onSubmit = e => {
+		e.preventDefault();
+		// check fieldErrors and return onSubmit earlier to prevent submission
+		const description = this.state.description;
+		const createdAt = this.state.createdAt;
+		const fieldErrors = validationAtFormLevel(description, createdAt);
+		this.setState(() => ({ fieldErrors }));
+		if (Object.keys(fieldErrors).length) return;
+
+		// if not errors found proceed with form submission
+		if (this.props.onSubmitEditTodo) {
+			const { description, createdAt } = this.state;
+			this.props.onSubmitEditTodo(this.props.id, { description, createdAt });
+		} else {
+			this.props.onSubmit({ ...this.state });
+			this.setState(() => ({ description: '', createdAt: undefined }));
+		}
 	};
 
 	render() {
@@ -86,7 +105,7 @@ class TodoAddForm extends React.Component {
 					<DayPickerInput
 						value={this.state.createdAt}
 						placeholder="Select a day"
-						onDayChange={this.handleCreatedAt}
+						onDayChange={this.onDayPickerChange}
 						formatDate={formatDate}
 						parseDate={parseDate}
 						format="dddd, MMMM Do, YYYY"
@@ -95,12 +114,16 @@ class TodoAddForm extends React.Component {
 							localeUtils: MomentLocaleUtils,
 						}}
 					/>
+					<ErrorSpan>{this.state.fieldErrors.createdAt}</ErrorSpan>
+
 					<Input
 						type="text"
 						placeholder="Add todo"
 						value={this.state.description}
 						onChange={this.onChangeDescription}
 					/>
+					<ErrorSpan>{this.state.fieldErrors.description}</ErrorSpan>
+
 					<Button>{this.props.isEditable ? 'Update' : 'Add'}</Button>
 				</Form>
 			</div>
