@@ -52,7 +52,6 @@ class Todo extends React.Component {
 		const list = this.updateListButtonName(lists);
 		return (
 			<Li>
-				<input type="checkbox" />
 				<span>{description}</span> <span>{createdAt}</span>
 				<Button onClick={() => onRemoveTodo(id)}>Remove</Button>
 				<Button onClick={() => onEditTodo({ id })}>Edit</Button>

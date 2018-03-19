@@ -18,7 +18,7 @@ const MainWrapper = styled.div`
 const Form = styled.form`
 	height: 4rem;
 	box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
-	margin-bottom: 2rem;
+	margin-bottom: 5rem;
 	position: relative;
 
 	> input {
