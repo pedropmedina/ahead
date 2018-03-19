@@ -69,8 +69,8 @@ const Header = () => {
 				</NavItem>
 				<NavItem to="/today">Today</NavItem>
 				<NavItem to="/createTodos">Create todos</NavItem>
-				<NavItem to="/createList">Create list</NavItem>
-				<NavItem to="/editList">Edit list</NavItem>
+				{/* <NavItem to="/createList">Create list</NavItem> */}
+				{/* <NavItem to="/editList">Edit list</NavItem> */}
 			</Nav>
 		</HeaderTag>
 	);

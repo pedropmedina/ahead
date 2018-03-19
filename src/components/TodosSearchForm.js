@@ -25,7 +25,7 @@ const TodosSearchForm = props => (
 		<Input
 			type="text"
 			value={props.searchTerm}
-			placeholder="Search by Date or todo's description..."
+			placeholder="Search by date or todo's description..."
 			onChange={props.onSearchTodo}
 		/>
 	</div>

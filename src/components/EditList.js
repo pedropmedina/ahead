@@ -1,8 +1,8 @@
 import React from 'react';
 
-const EditList = () => (
+const EditList = props => (
 	<div>
-		<h3>Edit List</h3>
+		<h3>Editing list with id: {props.match.params.id}</h3>
 	</div>
 );
 

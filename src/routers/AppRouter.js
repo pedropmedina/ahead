@@ -17,8 +17,8 @@ const TodoAppRouter = () => {
 					<Route exact path="/" component={CalendarView} />
 					<Route path="/today" component={TodayView} />
 					<Route path="/createTodos" component={CreateTodos} />
-					<Route path="/createList" component={CreateList} />
-					<Route path="/editList" component={EditList} />
+					<Route path="/createList/:id" component={CreateList} />
+					<Route path="/editList/:id" component={EditList} />
 					<Route component={PageNotFound} />
 				</Switch>
 			</div>
