@@ -4,7 +4,6 @@ import CalendarView from '../components/CalendarView';
 import TodayView from '../components/TodayView';
 import CreateTodos from '../components/CreateTodos';
 import CreateList from '../components/CreateList';
-import EditList from '../components/EditList';
 import Header from '../components/Header';
 import PageNotFound from '../components/PageNotFound';
 
@@ -18,7 +17,6 @@ const TodoAppRouter = () => {
 					<Route path="/today" component={TodayView} />
 					<Route path="/createTodos" component={CreateTodos} />
 					<Route path="/createList/:id" component={CreateList} />
-					<Route path="/editList/:id" component={EditList} />
 					<Route component={PageNotFound} />
 				</Switch>
 			</div>

@@ -6,6 +6,7 @@ export const addTodo = ({ description = '', createdAt = undefined } = {}) => ({
 	todo: {
 		description,
 		createdAt,
+		list: [],
 		id: uuid(),
 	},
 });
@@ -21,4 +22,11 @@ export const editTodo = (id, updates) => ({
 	type: 'EDIT_TODO',
 	id,
 	updates,
+});
+
+// add item to list
+export const addItemToList = (item, id) => ({
+	type: 'ADD_ITEM_TO_LIST',
+	item,
+	id,
 });

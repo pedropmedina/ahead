@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import uuid from 'uuid';
 import styled from 'styled-components';
-import showListView from '../selectors/showListView';
+import { connect } from 'react-redux';
 
 const Ul = styled.ul`
 	list-style: none;
@@ -33,31 +32,35 @@ const Ul = styled.ul`
 `;
 
 const List = props => {
-	const updatedList = showListView(props.lists, props.id);
+	const todo = props.todos.find(todo => todo.id === props.id);
 	let counter = 1;
 	return (
 		<div>
-			<Ul>
-				{updatedList.map(item => {
-					return (
-						<li key={uuid()}>
-							<span>{counter++}. </span>
-							{item.itemDescription}{' '}
-							<div>
-								<span>X</span>
-								<span>O</span>
-							</div>
-						</li>
-					);
-				})}
-			</Ul>
+			{todo ? (
+				<Ul>
+					{todo.list.map(item => {
+						return (
+							<li key={uuid()}>
+								<span>{counter++}. </span>
+								{item}
+								<div>
+									<span>X</span>
+									<span>O</span>
+								</div>
+							</li>
+						);
+					})}
+				</Ul>
+			) : (
+				props.push('/')
+			)}
 		</div>
 	);
 };
 
 const MapStateToProps = state => {
 	return {
-		lists: state.lists,
+		todos: state.todos,
 	};
 };
 

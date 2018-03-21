@@ -14,7 +14,7 @@ const TodoList = props => {
 		<div>
 			<Ul>
 				{props.todos
-					.map(({ description, createdAt, id }) => {
+					.map(({ description, createdAt, id, list }) => {
 						if (props.isEditable && props.editableId === id) {
 							return (
 								<TodoAddForm
@@ -33,9 +33,9 @@ const TodoList = props => {
 								id={id}
 								description={description}
 								createdAt={createdAt}
+								list={list}
 								onRemoveTodo={props.onRemoveTodo}
 								onEditTodo={props.onEditTodo}
-								onAddTodos={props.onAddTodos}
 							/>
 						);
 					})

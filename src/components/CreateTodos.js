@@ -43,8 +43,8 @@ class CreateTodos extends React.Component {
 	// edit todo from store
 	onSubmitEditTodo = (id, updates) => {
 		this.props.dispatch(editTodo(id, updates));
-		this.props.dispatch(setIsEditable());
 		this.props.dispatch(setIdToEdit({ id: null }));
+		this.props.dispatch(setIsEditable());
 	};
 
 	// handle selectDay
@@ -62,7 +62,6 @@ class CreateTodos extends React.Component {
 					editableId={id}
 					isEditable={isEditable}
 					selectDay={selectDay}
-					onAddTodos={this.onAddTodos}
 					onEditTodo={this.onEditTodo}
 					onSubmit={this.onSubmit}
 					onSubmitEditTodo={this.onSubmitEditTodo}

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 const Li = styled.li`
 	margin-bottom: 2rem;
@@ -33,40 +32,26 @@ const ListButton = styled(Link)`
 `;
 
 class Todo extends React.Component {
-	// toggle name if list exists under id
-	updateListButtonName = lists => {
-		return lists.filter(item => {
-			return item.id === this.props.id;
-		}).length;
-	};
-
 	render() {
 		const {
 			description,
 			createdAt,
 			id,
+			list,
 			onRemoveTodo,
 			onEditTodo,
-			lists,
 		} = this.props;
-		const list = this.updateListButtonName(lists);
 		return (
 			<Li>
 				<span>{description}</span> <span>{createdAt}</span>
 				<Button onClick={() => onRemoveTodo(id)}>Remove</Button>
 				<Button onClick={() => onEditTodo({ id })}>Edit</Button>
 				<ListButton to={`/createList/${id}`}>
-					{list ? 'Update List' : 'Need a List?'}
+					{list.length ? 'Update list' : 'Need a list?'}
 				</ListButton>
 			</Li>
 		);
 	}
 }
 
-const MapStateToProps = state => {
-	return {
-		lists: state.lists,
-	};
-};
-
-export default connect(MapStateToProps)(Todo);
+export default Todo;

@@ -49,7 +49,6 @@ class TodayView extends React.Component {
 						today={this.state.today}
 						editableId={id}
 						isEditable={isEditable}
-						onAddTodos={this.onAddTodos}
 						onEditTodo={this.onEditTodo}
 						onSubmit={this.onSubmit}
 						onSubmitEditTodo={this.onSubmitEditTodo}

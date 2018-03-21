@@ -1,7 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { addItemToList } from '../actions/lists';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { addItemToList } from '../actions/todo';
 import List from './List';
 
 //////
@@ -65,7 +65,8 @@ class CreateList extends React.Component {
 		e.preventDefault();
 		const itemDescription = this.state.itemDescription;
 		const id = this.props.match.params.id;
-		this.props.dispatch(addItemToList({ itemDescription, id }));
+		this.props.dispatch(addItemToList(itemDescription, id));
+		this.setState(() => ({ itemDescription: '' }));
 	};
 
 	render() {
@@ -80,7 +81,7 @@ class CreateList extends React.Component {
 					/>
 					<button onClick={this.onSubmit}>Add item</button>
 				</Form>
-				<List id={this.props.match.params.id} />
+				<List id={this.props.match.params.id} push={this.props.history.push} />
 			</MainWrapper>
 		);
 	}
