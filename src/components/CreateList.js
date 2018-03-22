@@ -16,7 +16,7 @@ const MainWrapper = styled.div`
 `;
 
 const Form = styled.form`
-	height: 4rem;
+	height: 5rem;
 	box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
 	margin-bottom: 5rem;
 	position: relative;
@@ -26,7 +26,7 @@ const Form = styled.form`
 		height: 100%;
 		border: none;
 		/* border: 0.1rem solid red; */
-		text-indent: 1rem;
+		text-indent: 1.5rem;
 		font-size: 1.6rem;
 		outline: none;
 
@@ -39,10 +39,13 @@ const Form = styled.form`
 		position: absolute;
 		right: 0;
 		height: 100%;
-		padding: 0.5rem 1.5rem;
-		border: 0.2rem solid #669969;
-		color: #669969;
+		/* width: 6rem; */
+		border: none;
+		background-color: #669969;
+		color: #fff;
 		font-weight: 500;
+		font-size: 3rem;
+		padding: 0 3rem;
 	}
 `;
 
@@ -76,10 +79,10 @@ class CreateList extends React.Component {
 					<input
 						type="text"
 						value={this.state.itemDescription}
-						placeholder="describe item"
+						placeholder="item"
 						onChange={this.onItemDescriptionChange}
 					/>
-					<button onClick={this.onSubmit}>Add item</button>
+					<button onClick={this.onSubmit} className="ion-plus-circled" />
 				</Form>
 				<List id={this.props.match.params.id} push={this.props.history.push} />
 			</MainWrapper>

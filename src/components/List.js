@@ -31,26 +31,45 @@ const Ul = styled.ul`
 	}
 `;
 
+const Path = styled.h4`
+	font-size: 1.2rem;
+	font-weight: 300;
+	color: #aaa;
+	padding: 1rem;
+	margin-bottom: 1.5rem;
+`;
+
+const Arrow = styled.span`
+	padding: 0 0.5rem;
+	color: #ccc;
+`;
+
 const List = props => {
 	const todo = props.todos.find(todo => todo.id === props.id);
 	let counter = 1;
 	return (
 		<div>
 			{todo ? (
-				<Ul>
-					{todo.list.map(item => {
-						return (
-							<li key={uuid()}>
-								<span>{counter++}. </span>
-								{item}
-								<div>
-									<span>X</span>
-									<span>O</span>
-								</div>
-							</li>
-						);
-					})}
-				</Ul>
+				<div>
+					<Path>
+						{todo.createdAt} <Arrow>&rarr;</Arrow> {todo.description}
+						<Arrow>&rarr;</Arrow> List
+					</Path>
+					<Ul>
+						{todo.list.map(item => {
+							return (
+								<li key={uuid()}>
+									<span>{counter++}. </span>
+									{item}
+									<div>
+										<span>X</span>
+										<span>O</span>
+									</div>
+								</li>
+							);
+						})}
+					</Ul>
+				</div>
 			) : (
 				props.push('/')
 			)}

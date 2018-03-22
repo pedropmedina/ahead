@@ -16,7 +16,7 @@ import TodoAddForm from './TodoAddForm';
 const MainWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
 	padding: 2rem;
 	max-width: 80%;
 	margin: 3rem auto;

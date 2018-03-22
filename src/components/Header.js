@@ -36,6 +36,7 @@ const Nav = styled.nav`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
+	margin-bottom: 3rem;
 
 	> * {
 		margin: 1rem;
@@ -52,7 +53,7 @@ const NavItem = styled(NavLink)`
 
 const TodayDate = styled.h2`
 	font-size: 3rem;
-	padding: 1rem 1rem 3rem 1rem;
+	padding: 1rem;
 	text-align: center;
 	color: #fff;
 	font-weight: 500;
@@ -65,10 +66,10 @@ const Header = () => {
 			<TodayDate>{moment().format('dddd, MMMM Do, YYYY')}</TodayDate>
 			<Nav>
 				<NavItem exact to="/">
-					Calendar
+					Month
 				</NavItem>
-				<NavItem to="/today">Today</NavItem>
-				<NavItem to="/createTodos">Create todos</NavItem>
+				<NavItem to="/today">Day</NavItem>
+				<NavItem to="/createTodos" className="ion-plus" />
 				{/* <NavItem to="/createList">Create list</NavItem> */}
 			</Nav>
 		</HeaderTag>

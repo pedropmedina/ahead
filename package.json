@@ -5,6 +5,7 @@
   "dependencies": {
     "moment": "^2.21.0",
     "numeral": "^2.0.6",
+    "rc-time-picker": "^3.3.1",
     "react": "^16.2.0",
     "react-date-picker": "^6.9.0",
     "react-day-picker": "^7.1.2",

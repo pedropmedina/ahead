@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
 import styled from 'styled-components';
-import '../style.css';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import TimePicker from 'rc-time-picker';
+import '../styles/datePicker.css';
+import '../styles/timePicker.css';
 import validationAtFormLevel from '../helpers/validationAtFormLevel';
 
 import MomentLocaleUtils, {
@@ -18,6 +20,7 @@ const Form = styled.form`
 	flex-wrap: wrap;
 	font-size: 1.6rem;
 	padding: 1rem;
+	max-width: 70rem;
 
 	> * {
 		width: 100%;
@@ -26,6 +29,11 @@ const Form = styled.form`
 			margin-bottom: 7rem;
 		}
 	}
+`;
+
+const TimePickerWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
 `;
 
 const Input = styled.input`
@@ -57,6 +65,8 @@ class TodoAddForm extends React.Component {
 	state = {
 		description: this.props.description || '',
 		createdAt: this.props.createdAt || undefined,
+		startTime: undefined,
+		endTime: undefined,
 		fieldErrors: {},
 	};
 
@@ -94,8 +104,25 @@ class TodoAddForm extends React.Component {
 			this.props.onSubmitEditTodo(this.props.id, { description, createdAt });
 		} else {
 			this.props.onSubmit({ ...this.state });
-			this.setState(() => ({ description: '', createdAt: undefined }));
+			this.setState(() => ({
+				description: '',
+				createdAt: undefined,
+				startTime: undefined,
+				endTime: undefined,
+			}));
 		}
+	};
+
+	// handle the state for startTime
+	onStartTimeChange = e => {
+		const startTime = e;
+		this.setState(() => ({ startTime }));
+	};
+
+	// handle the state for endTime
+	onEndTimeChange = e => {
+		const endTime = e;
+		this.setState(() => ({ endTime }));
 	};
 
 	render() {
@@ -114,7 +141,31 @@ class TodoAddForm extends React.Component {
 							localeUtils: MomentLocaleUtils,
 						}}
 					/>
-					<ErrorSpan>{this.state.fieldErrors.createdAt}</ErrorSpan>
+					{this.state.fieldErrors.createdAt && (
+						<ErrorSpan>{this.state.fieldErrors.createdAt}</ErrorSpan>
+					)}
+
+					<TimePickerWrapper>
+						<TimePicker
+							showSecond={false}
+							value={this.state.startTime}
+							format="h:mm a"
+							use12Hours
+							inputReadOnly
+							onChange={this.onStartTimeChange}
+							placeholder="Start time"
+						/>
+
+						<TimePicker
+							showSecond={false}
+							value={this.state.endTime}
+							// format="h:mm a"
+							use12Hours
+							inputReadOnly
+							onChange={this.onEndTimeChange}
+							placeholder="End time"
+						/>
+					</TimePickerWrapper>
 
 					<Input
 						type="text"
@@ -122,7 +173,9 @@ class TodoAddForm extends React.Component {
 						value={this.state.description}
 						onChange={this.onChangeDescription}
 					/>
-					<ErrorSpan>{this.state.fieldErrors.description}</ErrorSpan>
+					{this.state.fieldErrors.description && (
+						<ErrorSpan>{this.state.fieldErrors.description}</ErrorSpan>
+					)}
 
 					<Button>{this.props.isEditable ? 'Update' : 'Add'}</Button>
 				</Form>

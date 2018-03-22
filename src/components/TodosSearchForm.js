@@ -1,34 +1,51 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const MainWrapper = styled.div`
+	position: relative;
+	width: 80%;
+	margin: -3.5rem auto 3rem auto;
+	background-color: #fff;
+
+	> i {
+		position: absolute;
+		top: 50%;
+		left: 5%;
+		transform: translateY(-50%);
+		font-size: 2.5rem;
+		color: #ddd;
+	}
+`;
+
 const Input = styled.input`
+	/* margin-top: 1.5rem; */
+	/* border-bottom: 0.2rem solid #b74255; */
 	border: none;
-	border-bottom: 0.2rem solid #b74255;
 	width: 100%;
 	background-color: transparent;
 	height: 7rem;
 	font-size: 2rem;
 	outline: none;
-	text-indent: 3rem;
+	text-indent: 8%;
 	letter-spacing: 0.1rem;
 	box-shadow: 0 0.5rem 0.6rem rgba(0, 0, 0, 0.1);
-	/* margin-top: 1.5rem; */
 
 	&::placeholder {
-		color: #efb6bf;
+		color: #ddd;
 		font-style: italic;
 	}
 `;
 
 const TodosSearchForm = props => (
-	<div>
+	<MainWrapper>
+		<i className="ion-search" />
 		<Input
 			type="text"
 			value={props.searchTerm}
 			placeholder="Search by date or todo's description..."
 			onChange={props.onSearchTodo}
 		/>
-	</div>
+	</MainWrapper>
 );
 
 export default TodosSearchForm;

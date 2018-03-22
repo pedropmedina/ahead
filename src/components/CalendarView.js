@@ -15,12 +15,12 @@ const MainWrapper = styled.div`
 `;
 
 const DayWrapper = styled.div`
-	background-color: #f9f7f7;
-	border-top: 0.2rem solid #aaa;
+	/* border-top: 0.2rem solid #aaa; */
+	background-color: #fff;
 	padding: 2rem 3rem;
 	display: inline-block;
 	font-size: 1.6rem;
-	box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.15);
 	margin: 1rem;
 	flex: 1;
 `;
