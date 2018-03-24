@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const Li = styled.li`
@@ -43,7 +44,8 @@ class Todo extends React.Component {
 		} = this.props;
 		return (
 			<Li>
-				<span>{description}</span> <span>{createdAt}</span>
+				<span>{moment(createdAt).format('dddd, MMMM Do, YYYY')}</span>
+				<span>{description}</span>{' '}
 				<Button onClick={() => onRemoveTodo(id)}>Remove</Button>
 				<Button onClick={() => onEditTodo({ id })}>Edit</Button>
 				<ListButton to={`/createList/${id}`}>

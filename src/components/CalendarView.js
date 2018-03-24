@@ -2,6 +2,7 @@ import React from 'react';
 import uuid from 'uuid';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import moment from 'moment';
 import showCalendarView from '../selectors/showCalendarView';
 import TodosSearchForm from './TodosSearchForm';
 import MultiDayPicker from './MultiDayPicker';
@@ -49,9 +50,12 @@ class CalendarView extends React.Component {
 				<MainWrapper>
 					{keys
 						.map(key => {
+							const todoDateHeader = moment(todos[key][0].createdAt).format(
+								'dddd, MMMM Do, YYYY',
+							);
 							return (
 								<DayWrapper key={uuid()}>
-									<h4>{todos[key][0].createdAt}</h4>
+									<h4>{todoDateHeader}</h4>
 									{todos[key].map(todo => {
 										return <p key={todo.id}>{todo.description}</p>;
 									})}

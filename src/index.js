@@ -35,13 +35,13 @@ const unsubscribe = store.subscribe(() => {
 store.dispatch(
 	addTodo({
 		description: "Buy Philippe's food",
-		createdAt: moment().format('dddd, MMMM Do, YYYY'),
+		createdAt: moment(),
 	}),
 );
 store.dispatch(
 	addTodo({
 		description: 'Do groceries',
-		createdAt: moment().format('dddd, MMMM Do, YYYY'),
+		createdAt: moment(),
 	}),
 );
 

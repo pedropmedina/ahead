@@ -1,6 +1,7 @@
 import React from 'react';
 import uuid from 'uuid';
 import styled from 'styled-components';
+import moment from 'moment';
 import { connect } from 'react-redux';
 
 const Ul = styled.ul`
@@ -46,13 +47,17 @@ const Arrow = styled.span`
 
 const List = props => {
 	const todo = props.todos.find(todo => todo.id === props.id);
+	let createdAt = undefined;
+	if (todo) {
+		createdAt = moment(todo.createdAt).format('dddd, MMMM Do, YYYY');
+	}
 	let counter = 1;
 	return (
 		<div>
 			{todo ? (
 				<div>
 					<Path>
-						{todo.createdAt} <Arrow>&rarr;</Arrow> {todo.description}
+						{createdAt} <Arrow>&rarr;</Arrow> {todo.description}
 						<Arrow>&rarr;</Arrow> List
 					</Path>
 					<Ul>

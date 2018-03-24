@@ -76,6 +76,10 @@
 	font-weight: 500;
 }
 
+.rc-time-picker-panel-input::placeholder {
+	color: white;
+}
+
 .rc-time-picker-panel-input-wrap {
 	box-sizing: border-box;
 	position: relative;

@@ -6,6 +6,7 @@ import TimePicker from 'rc-time-picker';
 import '../styles/datePicker.css';
 import '../styles/timePicker.css';
 import validationAtFormLevel from '../helpers/validationAtFormLevel';
+import { disableHours, disableMinutes } from '../helpers/disableHoursMinutes';
 
 import MomentLocaleUtils, {
 	formatDate,
@@ -79,7 +80,7 @@ class TodoAddForm extends React.Component {
 	// handle created at
 	onDayPickerChange = day => {
 		let createdAt;
-		if (day) createdAt = moment(day).format('dddd, MMMM Do, YYYY');
+		if (day) createdAt = day;
 		if (this.props.isEditable) {
 			this.setState(() => ({ createdAt }));
 			return;
@@ -111,6 +112,7 @@ class TodoAddForm extends React.Component {
 				endTime: undefined,
 			}));
 		}
+		this.props.push('/');
 	};
 
 	// handle the state for startTime
@@ -126,11 +128,18 @@ class TodoAddForm extends React.Component {
 	};
 
 	render() {
+		const toggleEndTimeDisabled = !this.state.startTime;
+		const toogleStartTimeDisabled = this.state.createdAt
+			? !moment(this.state.createdAt).isSameOrAfter(moment(), 'day')
+			: true;
+		const dayPickerValue = this.state.createdAt
+			? moment(this.state.createdAt).format('dddd, MMMM Do, YYYY')
+			: undefined;
 		return (
 			<div>
 				<Form action="#" onSubmit={this.onSubmit}>
 					<DayPickerInput
-						value={this.state.createdAt}
+						value={dayPickerValue}
 						placeholder="Select a day"
 						onDayChange={this.onDayPickerChange}
 						formatDate={formatDate}
@@ -139,6 +148,9 @@ class TodoAddForm extends React.Component {
 						dayPickerProps={{
 							locale: 'en',
 							localeUtils: MomentLocaleUtils,
+							todayButton: moment().format('[today] Do'),
+							className: 'Form-DayPickerInput',
+							fixedWeeks: true,
 						}}
 					/>
 					{this.state.fieldErrors.createdAt && (
@@ -152,6 +164,9 @@ class TodoAddForm extends React.Component {
 							format="h:mm a"
 							use12Hours
 							inputReadOnly
+							disabled={toogleStartTimeDisabled}
+							disabledHours={() => disableHours(moment().format('HH'))}
+							disabledMinutes={() => disableMinutes(moment().format('mm'))}
 							onChange={this.onStartTimeChange}
 							placeholder="Start time"
 						/>
@@ -159,9 +174,16 @@ class TodoAddForm extends React.Component {
 						<TimePicker
 							showSecond={false}
 							value={this.state.endTime}
-							// format="h:mm a"
+							format="h:mm a"
 							use12Hours
 							inputReadOnly
+							disabled={toggleEndTimeDisabled}
+							disabledHours={() =>
+								disableHours(moment(this.state.startTime).format('HH'))
+							}
+							disabledMinutes={() =>
+								disableMinutes(moment(this.state.startTime).format('mm'))
+							}
 							onChange={this.onEndTimeChange}
 							placeholder="End time"
 						/>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import Todo from './Todo';
 import TodoAddForm from './TodoAddForm';
 import styled from 'styled-components';
@@ -24,6 +25,7 @@ const TodoList = props => {
 									createdAt={createdAt}
 									onSubmitEditTodo={props.onSubmitEditTodo}
 									isEditable={props.isEditable}
+									push={props.push}
 								/>
 							);
 						}
@@ -40,8 +42,13 @@ const TodoList = props => {
 						);
 					})
 					.filter(todo => {
-						if (props.today) return todo.props.createdAt === props.today;
-						return todo.props.createdAt === props.selectDay;
+						const createdAt = moment(todo.props.createdAt).format(
+							'dddd, MMMM Do, YYYY',
+						);
+
+						if (props.today) return createdAt === props.today;
+						return false;
+						// return todo.createdAt === props.selectDay;
 					})}
 			</Ul>
 		</div>

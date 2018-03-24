@@ -7,7 +7,7 @@ import {
 	setIdToEdit,
 	setIsEditable,
 } from '../actions/editability';
-import TodosList from './TodosList';
+// import TodosList from './TodosList';
 import TodoAddForm from './TodoAddForm';
 
 //////
@@ -54,11 +54,15 @@ class CreateTodos extends React.Component {
 	};
 
 	render() {
-		const { isEditable, id, selectDay } = this.props.editability;
+		// const { isEditable, id, selectDay } = this.props.editability;
 		return (
 			<MainWrapper>
-				<TodoAddForm onSubmit={this.onSubmit} onSelectDay={this.onSelectDay} />
-				<TodosList
+				<TodoAddForm
+					onSubmit={this.onSubmit}
+					onSelectDay={this.onSelectDay}
+					push={this.props.history.push}
+				/>
+				{/* <TodosList
 					editableId={id}
 					isEditable={isEditable}
 					selectDay={selectDay}
@@ -67,15 +71,15 @@ class CreateTodos extends React.Component {
 					onSubmitEditTodo={this.onSubmitEditTodo}
 					onRemoveTodo={this.onRemoveTodo}
 					onSelectDay={this.onSelectDay}
-				/>
+				/> */}
 			</MainWrapper>
 		);
 	}
 }
 
-const MapStateToProps = state => ({
-	todos: state.todos,
-	editability: state.editability,
-});
+// const MapStateToProps = state => ({
+// 	todos: state.todos,
+// 	editability: state.editability,
+// });
 
-export default connect(MapStateToProps)(CreateTodos);
+export default connect()(CreateTodos);

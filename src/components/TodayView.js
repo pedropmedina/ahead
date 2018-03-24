@@ -53,6 +53,7 @@ class TodayView extends React.Component {
 						onSubmit={this.onSubmit}
 						onSubmitEditTodo={this.onSubmitEditTodo}
 						onRemoveTodo={this.onRemoveTodo}
+						push={this.props.history.push}
 					/>
 				</TodosWrapper>
 			</div>
@@ -61,7 +62,6 @@ class TodayView extends React.Component {
 }
 
 const MapStateToProps = state => ({
-	todos: state.todos,
 	editability: state.editability,
 });
 

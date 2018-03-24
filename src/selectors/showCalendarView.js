@@ -1,13 +1,14 @@
+import moment from 'moment';
+
 const showCalendarView = todos => {
 	const newTodosByDay = {};
 	for (let i = 0; i < todos.length; i++) {
-		if (Object.keys(newTodosByDay).includes(todos[i].createdAt)) {
-			newTodosByDay[todos[i].createdAt] = [
-				...newTodosByDay[todos[i].createdAt],
-				todos[i],
-			];
+		const createdAt = moment(todos[i].createdAt).format('dddd, MMMM Do, YYYY');
+
+		if (Object.keys(newTodosByDay).includes(createdAt)) {
+			newTodosByDay[createdAt] = [...newTodosByDay[createdAt], todos[i]];
 		} else {
-			newTodosByDay[todos[i].createdAt] = [todos[i]];
+			newTodosByDay[createdAt] = [todos[i]];
 		}
 	}
 	return newTodosByDay;
