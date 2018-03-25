@@ -1,5 +1,6 @@
 import React from 'react';
 import DayPicker, { DateUtils } from 'react-day-picker';
+import ReactResizeDetector from 'react-resize-detector';
 import styled from 'styled-components';
 import '../style.css';
 
@@ -8,16 +9,19 @@ import '../style.css';
 //////
 const MainWrapper = styled.div`
 	position: fixed;
-	bottom: ${props => (props.isOpen ? 0 : '-39rem')};
+	bottom: ${props => (props.isOpen ? 0 : '-63.7rem')};
 	width: 100%;
-	height: 39rem;
 	display: block;
-	background-color: #eee;
+	background-color: #f7f7f7;
 	transition: all 0.5s;
+	padding: 6rem 0;
 `;
 
 const RangeInfo = styled.div`
-	padding: 1rem;
+	position: absolute;
+	top: 3rem;
+	left: 50%;
+	transform: translate(-50%, -1rem);
 	text-align: center;
 	font-size: 1.6rem;
 	height: 6rem;
@@ -38,7 +42,7 @@ const ExpandButton = styled.button`
 	border-radius: 50%;
 	width: 5rem;
 	height: 5rem;
-	background-color: ${props => (props.isOpen ? '#eee' : '#b74255')};
+	background-color: ${props => (props.isOpen ? '#f7f7f7' : '#b74255')};
 	color: ${props => (props.isOpen ? '#aaa' : '#fff')};
 	font-weight: 700;
 	font-size: 4rem;
@@ -57,6 +61,7 @@ class MultiDayPicker extends React.Component {
 		to: null,
 		enteredTo: null,
 		isOpen: false,
+		windowWidth: null,
 	};
 
 	isSelectingFirstDay = (from, to, day) => {
@@ -106,13 +111,21 @@ class MultiDayPicker extends React.Component {
 		this.setState(() => ({ isOpen: !this.state.isOpen }));
 	};
 
+	onWindowResize = () => {
+		const windowWidth = window.innerWidth;
+		this.setState(() => ({ windowWidth }));
+		console.log(this.state.windowWidth);
+	};
+
 	render() {
 		const { from, to, enteredTo } = this.state;
 		const modifiers = { start: from, end: enteredTo };
 		const disabledDays = { before: this.state.from };
 		const selectedDays = [from, { from, to: enteredTo }];
+
 		return (
 			<MainWrapper isOpen={this.state.isOpen}>
+				<ReactResizeDetector handleWidth onResize={this.onWindowResize} />
 				<ExpandButton
 					onClick={this.onToggleCalendar}
 					isOpen={this.state.isOpen}
@@ -125,8 +138,15 @@ class MultiDayPicker extends React.Component {
 				</ExpandButton>
 				<DayPicker
 					className="Range"
-					numberOfMonths={4}
+					numberOfMonths={
+						this.state.windowWidth < 947
+							? 1
+							: this.state.windowWidth < 1460
+								? 2
+								: this.state.windowWidth < 1950 ? 3 : 4
+					}
 					fromMonth={from}
+					fixedWeeks
 					selectedDays={selectedDays}
 					disabledDays={disabledDays}
 					modifiers={modifiers}

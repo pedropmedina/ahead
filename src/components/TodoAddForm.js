@@ -26,10 +26,24 @@ const Form = styled.form`
 	> * {
 		width: 100%;
 
+		&:nth-child(2) {
+			position: relative;
+		}
+
 		&:not(:last-child) {
 			margin-bottom: 7rem;
 		}
 	}
+`;
+
+const CalendarIcon = styled.span`
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: #888;
+	font-size: 2rem;
 `;
 
 const TimePickerWrapper = styled.div`
@@ -128,31 +142,55 @@ class TodoAddForm extends React.Component {
 	};
 
 	render() {
+		// display human readable date in DatePickerInput
+		const dayPickerValue = this.state.createdAt
+			? moment(this.state.createdAt).format('dddd, MMMM Do, YYYY')
+			: undefined;
+
+		// toggle disabled for both start and end time
 		const toggleEndTimeDisabled = !this.state.startTime;
 		const toogleStartTimeDisabled = this.state.createdAt
 			? !moment(this.state.createdAt).isSameOrAfter(moment(), 'day')
 			: true;
-		const dayPickerValue = this.state.createdAt
-			? moment(this.state.createdAt).format('dddd, MMMM Do, YYYY')
-			: undefined;
+
+		// variables to disable past time in time picker
+		const day = moment(this.state.createdAt).format('MMMM Do YYYY');
+		const today = moment().format('MMMM Do YYYY');
+		const hour = moment(this.state.startTime).format('HH');
+		const minute = moment().format('mm');
+
 		return (
 			<div>
 				<Form action="#" onSubmit={this.onSubmit}>
-					<DayPickerInput
-						value={dayPickerValue}
-						placeholder="Select a day"
-						onDayChange={this.onDayPickerChange}
-						formatDate={formatDate}
-						parseDate={parseDate}
-						format="dddd, MMMM Do, YYYY"
-						dayPickerProps={{
-							locale: 'en',
-							localeUtils: MomentLocaleUtils,
-							todayButton: moment().format('[today] Do'),
-							className: 'Form-DayPickerInput',
-							fixedWeeks: true,
-						}}
+					<Input
+						type="text"
+						placeholder="Add todo"
+						value={this.state.description}
+						onChange={this.onChangeDescription}
 					/>
+					{this.state.fieldErrors.description && (
+						<ErrorSpan>{this.state.fieldErrors.description}</ErrorSpan>
+					)}
+
+					<div>
+						<CalendarIcon className="ion-calendar" />
+						<DayPickerInput
+							value={dayPickerValue}
+							placeholder="Select a day"
+							onDayChange={this.onDayPickerChange}
+							formatDate={formatDate}
+							parseDate={parseDate}
+							format="dddd, MMMM Do, YYYY"
+							dayPickerProps={{
+								locale: 'en',
+								localeUtils: MomentLocaleUtils,
+								todayButton: moment().format('[today] Do'),
+								className: 'Form-DayPickerInput',
+								fixedWeeks: true,
+							}}
+						/>
+					</div>
+
 					{this.state.fieldErrors.createdAt && (
 						<ErrorSpan>{this.state.fieldErrors.createdAt}</ErrorSpan>
 					)}
@@ -166,7 +204,7 @@ class TodoAddForm extends React.Component {
 							inputReadOnly
 							disabled={toogleStartTimeDisabled}
 							disabledHours={() => disableHours(moment().format('HH'))}
-							disabledMinutes={() => disableMinutes(moment().format('mm'))}
+							disabledMinutes={() => disableMinutes(minute, day, today)}
 							onChange={this.onStartTimeChange}
 							placeholder="Start time"
 						/>
@@ -178,9 +216,7 @@ class TodoAddForm extends React.Component {
 							use12Hours
 							inputReadOnly
 							disabled={toggleEndTimeDisabled}
-							disabledHours={() =>
-								disableHours(moment(this.state.startTime).format('HH'))
-							}
+							disabledHours={() => disableHours(hour, day, today)}
 							disabledMinutes={() =>
 								disableMinutes(moment(this.state.startTime).format('mm'))
 							}
@@ -188,16 +224,6 @@ class TodoAddForm extends React.Component {
 							placeholder="End time"
 						/>
 					</TimePickerWrapper>
-
-					<Input
-						type="text"
-						placeholder="Add todo"
-						value={this.state.description}
-						onChange={this.onChangeDescription}
-					/>
-					{this.state.fieldErrors.description && (
-						<ErrorSpan>{this.state.fieldErrors.description}</ErrorSpan>
-					)}
 
 					<Button>{this.props.isEditable ? 'Update' : 'Add'}</Button>
 				</Form>

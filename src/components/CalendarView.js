@@ -7,7 +7,7 @@ import showCalendarView from '../selectors/showCalendarView';
 import TodosSearchForm from './TodosSearchForm';
 import MultiDayPicker from './MultiDayPicker';
 
-const MainWrapper = styled.div`
+const TodosWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	padding: 2rem;
@@ -24,6 +24,18 @@ const DayWrapper = styled.div`
 	box-shadow: 0 0.4rem 1.5rem rgba(0, 0, 0, 0.15);
 	margin: 1rem;
 	flex: 1;
+`;
+
+const SelectionButton = styled.button`
+	position: absolute;
+	color: #aaa;
+	border: none;
+	/* transform: translateY(-50vh); */
+`;
+
+const NextButton = SelectionButton.extend`
+	top: 50vh;
+	right: 3rem;
 `;
 
 class CalendarView extends React.Component {
@@ -47,7 +59,8 @@ class CalendarView extends React.Component {
 					searchTerm={this.state.searchTerm}
 					onSearchTodo={this.onSearchTodo}
 				/>
-				<MainWrapper>
+				<NextButton>→</NextButton>
+				<TodosWrapper>
 					{keys
 						.map(key => {
 							const todoDateHeader = moment(todos[key][0].createdAt).format(
@@ -77,7 +90,7 @@ class CalendarView extends React.Component {
 									.includes(this.state.searchTerm.toLowerCase())
 							);
 						})}
-				</MainWrapper>
+				</TodosWrapper>
 				<MultiDayPicker />
 			</div>
 		);

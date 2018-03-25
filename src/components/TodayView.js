@@ -6,6 +6,7 @@ import { removeTodo, editTodo } from '../actions/todo';
 import { setIdToEdit, setIsEditable } from '../actions/editability';
 import TodosSearchForm from './TodosSearchForm';
 import TodosList from './TodosList';
+import MultiDayPicker from './MultiDayPicker';
 
 const TodosWrapper = styled.div`
 	display: flex;
@@ -55,6 +56,7 @@ class TodayView extends React.Component {
 						onRemoveTodo={this.onRemoveTodo}
 						push={this.props.history.push}
 					/>
+					<MultiDayPicker />
 				</TodosWrapper>
 			</div>
 		);

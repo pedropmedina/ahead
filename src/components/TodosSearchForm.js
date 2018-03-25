@@ -10,7 +10,7 @@ const MainWrapper = styled.div`
 	> i {
 		position: absolute;
 		top: 50%;
-		left: 5%;
+		left: 2rem;
 		transform: translateY(-50%);
 		font-size: 2.5rem;
 		color: #ddd;
@@ -26,7 +26,7 @@ const Input = styled.input`
 	height: 7rem;
 	font-size: 2rem;
 	outline: none;
-	text-indent: 8%;
+	text-indent: 5rem;
 	letter-spacing: 0.1rem;
 	box-shadow: 0 0.5rem 0.6rem rgba(0, 0, 0, 0.1);
 

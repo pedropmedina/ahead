@@ -49,7 +49,7 @@ class Todo extends React.Component {
 				<Button onClick={() => onRemoveTodo(id)}>Remove</Button>
 				<Button onClick={() => onEditTodo({ id })}>Edit</Button>
 				<ListButton to={`/createList/${id}`}>
-					{list.length ? 'Update list' : 'Need a list?'}
+					{list.length ? 'View list' : 'Need a list?'}
 				</ListButton>
 			</Li>
 		);

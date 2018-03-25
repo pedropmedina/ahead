@@ -41,7 +41,7 @@ const Form = styled.form`
 		height: 100%;
 		/* width: 6rem; */
 		border: none;
-		background-color: #669969;
+		background-color: #aaa;
 		color: #fff;
 		font-weight: 500;
 		font-size: 3rem;
