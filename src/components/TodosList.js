@@ -15,14 +15,14 @@ const TodoList = props => {
 		<div>
 			<Ul>
 				{props.todos
-					.map(({ description, createdAt, id, list }) => {
+					.map(({ id, title, start, end, list }) => {
 						if (props.isEditable && props.editableId === id) {
 							return (
 								<TodoAddForm
 									key={id}
 									id={id}
-									description={description}
-									createdAt={createdAt}
+									title={title}
+									start={start}
 									onSubmitEditTodo={props.onSubmitEditTodo}
 									isEditable={props.isEditable}
 									push={props.push}
@@ -33,8 +33,8 @@ const TodoList = props => {
 							<Todo
 								key={id}
 								id={id}
-								description={description}
-								createdAt={createdAt}
+								title={title}
+								start={start}
 								list={list}
 								onRemoveTodo={props.onRemoveTodo}
 								onEditTodo={props.onEditTodo}
@@ -42,13 +42,12 @@ const TodoList = props => {
 						);
 					})
 					.filter(todo => {
-						const createdAt = moment(todo.props.createdAt).format(
+						const start = moment(todo.props.start).format(
 							'dddd, MMMM Do, YYYY',
 						);
 
-						if (props.today) return createdAt === props.today;
+						if (props.today) return start === props.today;
 						return false;
-						// return todo.createdAt === props.selectDay;
 					})}
 			</Ul>
 		</div>

@@ -6,7 +6,8 @@ import { removeTodo, editTodo } from '../actions/todo';
 import { setIdToEdit, setIsEditable } from '../actions/editability';
 import TodosSearchForm from './TodosSearchForm';
 import TodosList from './TodosList';
-import MultiDayPicker from './MultiDayPicker';
+import Calendar from './Calendar';
+import NavButtons from './NavButtons';
 
 const TodosWrapper = styled.div`
 	display: flex;
@@ -45,6 +46,7 @@ class TodayView extends React.Component {
 		return (
 			<div>
 				<TodosSearchForm />
+				<NavButtons />
 				<TodosWrapper>
 					<TodosList
 						today={this.state.today}
@@ -56,7 +58,7 @@ class TodayView extends React.Component {
 						onRemoveTodo={this.onRemoveTodo}
 						push={this.props.history.push}
 					/>
-					<MultiDayPicker />
+					<Calendar />
 				</TodosWrapper>
 			</div>
 		);

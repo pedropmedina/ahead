@@ -34,18 +34,11 @@ const ListButton = styled(Link)`
 
 class Todo extends React.Component {
 	render() {
-		const {
-			description,
-			createdAt,
-			id,
-			list,
-			onRemoveTodo,
-			onEditTodo,
-		} = this.props;
+		const { title, start, id, list, onRemoveTodo, onEditTodo } = this.props;
 		return (
 			<Li>
-				<span>{moment(createdAt).format('dddd, MMMM Do, YYYY')}</span>
-				<span>{description}</span>{' '}
+				<span>{moment(start).format('dddd, MMMM Do, YYYY')}</span>
+				<span>{title}</span>{' '}
 				<Button onClick={() => onRemoveTodo(id)}>Remove</Button>
 				<Button onClick={() => onEditTodo({ id })}>Edit</Button>
 				<ListButton to={`/createList/${id}`}>

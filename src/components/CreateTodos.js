@@ -54,7 +54,6 @@ class CreateTodos extends React.Component {
 	};
 
 	render() {
-		// const { isEditable, id, selectDay } = this.props.editability;
 		return (
 			<MainWrapper>
 				<TodoAddForm
@@ -62,24 +61,9 @@ class CreateTodos extends React.Component {
 					onSelectDay={this.onSelectDay}
 					push={this.props.history.push}
 				/>
-				{/* <TodosList
-					editableId={id}
-					isEditable={isEditable}
-					selectDay={selectDay}
-					onEditTodo={this.onEditTodo}
-					onSubmit={this.onSubmit}
-					onSubmitEditTodo={this.onSubmitEditTodo}
-					onRemoveTodo={this.onRemoveTodo}
-					onSelectDay={this.onSelectDay}
-				/> */}
 			</MainWrapper>
 		);
 	}
 }
-
-// const MapStateToProps = state => ({
-// 	todos: state.todos,
-// 	editability: state.editability,
-// });
 
 export default connect()(CreateTodos);

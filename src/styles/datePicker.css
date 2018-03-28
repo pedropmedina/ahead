@@ -202,6 +202,7 @@ form .DayPicker {
 	height: 100%;
 	position: relative;
 	box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.2);
+	z-index: 20;
 }
 
 form .DayPickerInput {
@@ -221,7 +222,7 @@ form .DayPickerInput input {
 }
 
 form .DayPickerInput-OverlayWrapper {
-	width: 50rem;
+	width: 100%;
 }
 
 form .DayPickerInput-Overlay {
@@ -236,7 +237,7 @@ form .DayPicker-wrapper {
 	-ms-user-select: none;
 	user-select: none;
 	flex-direction: row;
-	width: 50rem;
+	width: 100%;
 	outline: none;
 	background-color: red;
 	padding: 0;
@@ -258,7 +259,7 @@ form .DayPicker-Month {
 	user-select: none;
 	margin: 0;
 	color: rgb(93, 91, 91);
-	font-size: 1.6rem;
+	font-size: 1.2rem;
 	background-color: #fff;
 	width: 100%;
 }
@@ -286,8 +287,8 @@ form .DayPicker-WeekdaysRow {
 
 form .DayPicker-Weekday {
 	display: table-cell;
-	padding: 2.5rem 2rem 2rem 2rem;
-	font-size: 2rem;
+	padding: 1.2rem;
+	font-size: 1.6rem;
 	text-align: center;
 	color: #b74255;
 }
@@ -307,7 +308,7 @@ form .DayPicker-Week {
 
 form .DayPicker-Day {
 	display: table-cell;
-	padding: 2.5rem;
+	padding: 1.2rem;
 	text-align: center;
 	cursor: pointer;
 	vertical-align: middle;
@@ -340,7 +341,7 @@ form .DayPicker-Footer {
 
 form .DayPicker-TodayButton {
 	border: none;
-	border-left: 0.2rem solid #fff;
+	/* border-left: 0.2rem solid #fff; */
 	background-image: none;
 	background-color: transparent;
 	box-shadow: none;
@@ -356,22 +357,22 @@ form .DayPicker-NavButton {
 	width: 4rem;
 	height: 4rem;
 	display: inline-block;
-	border-radius: 50%;
-	border: 0.1rem solid #fff;
+	/* border-radius: 50%; */
+	/* border: 0.1rem solid #fff; */
 	outline: none;
 	background-image: none;
 }
 
 form .DayPicker-NavButton--prev {
 	position: absolute;
-	left: 15%;
-	top: 4rem;
+	left: 5%;
+	top: 3rem;
 }
 
 form .DayPicker-NavButton--prev::before {
 	content: '\2190';
 	color: #fff;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -380,14 +381,14 @@ form .DayPicker-NavButton--prev::before {
 
 form .DayPicker-NavButton--next {
 	position: absolute;
-	right: 15%;
-	top: 4rem;
+	right: 5%;
+	top: 3rem;
 }
 
 form .DayPicker-NavButton--next::after {
 	content: '\2192';
 	color: #fff;
-	font-size: 1rem;
+	font-size: 1.2rem;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -420,9 +421,9 @@ form
 	height: 100%;
 	margin: 0 auto;
 	font-size: 1.6rem;
-	display: block;
+	/* display: block;
 	display: flex;
-	justify-content: center;
+	justify-content: center; */
 	position: relative;
 	/* border: 0.2rem solid black; */
 }
@@ -449,29 +450,37 @@ form
 	height: 100%; */
 	/* border: 0.2rem solid green; */
 	width: 100%;
-	display: flex;
-	justify-content: center;
+	/* display: flex;
+	justify-content: center; */
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .Range .DayPicker-Month {
 	outline: none;
 	margin: 0 2rem;
-	box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.2);
+	/* width: 75%; */
+	/* box-shadow: 0 0.3rem 0.7rem rgba(0, 0, 0, 0.2); */
 	/* width: 35rem; */
+	/* border: 0.2rem solid black; */
 }
 
 .Range .DayPicker-Caption {
 	text-align: center;
 	background-color: #b74255;
+	color: #f7f7f7;
 	padding: 3rem;
 	margin: 0;
+	margin-bottom: 2rem;
 	/* border: 0.2rem solid blue; */
 }
 
 .Range .DayPicker-Caption > div {
-	font-size: 2rem;
-	font-weight: 300;
-	color: #fff;
+	font-size: 2.5rem;
+	font-weight: 500;
+	letter-spacing: 0.15rem;
+	/* color: #fff; */
 	/* border: 0.2rem solid orange; */
 }
 
@@ -485,7 +494,7 @@ form
 
 .Range .DayPicker-Weekday {
 	display: table-cell;
-	padding: 2.5rem 2rem 2rem 2rem;
+	padding: 3rem;
 	font-size: 2rem;
 	text-align: center;
 	color: #b74255;
@@ -507,12 +516,14 @@ form
 
 .Range .DayPicker-Day {
 	display: table-cell;
-	padding: 2rem;
+	padding: 3.5rem;
 	text-align: center;
 	cursor: pointer;
 	vertical-align: middle;
 	outline: none;
-	/* border: 0.2rem solid purple; */
+	font-size: 2.5rem;
+	font-weight: 300;
+	/* border-bottom: 0.1rem solid purple; */
 }
 
 /* .Range .DayPicker-WeekNumber {
@@ -546,10 +557,13 @@ form
 }
 
 .Range .DayPicker-NavBar {
-	/* position: absolute;
-	bottom: 2rem;
-	left: 2rem; */
+	position: absolute;
+	top: 7rem;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 55rem;
 	/* border: 0.2rem solid darkorange; */
+	z-index: 100;
 }
 
 .Range .DayPicker-NavButton {
@@ -558,20 +572,23 @@ form
 	height: 4rem;
 	display: inline-block;
 	border-radius: 50%;
-	border: 0.1rem solid #b74255;
+	border: 0.1rem solid #fff;
+	padding: 1rem;
 	outline: none;
 	background-image: none;
+	z-index: 50;
 }
 
 .Range .DayPicker-NavButton--prev {
 	position: absolute;
-	left: 15%;
-	top: -5rem;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .Range .DayPicker-NavButton--prev::before {
 	content: '\2190';
-	color: #b74255;
+	color: #fff;
 	font-size: 1.6rem;
 	position: absolute;
 	left: 50%;
@@ -581,13 +598,14 @@ form
 
 .Range .DayPicker-NavButton--next {
 	position: absolute;
-	right: 15%;
-	top: -5rem;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 .Range .DayPicker-NavButton--next::after {
 	content: '\2192';
-	color: #b74255;
+	color: #fff;
 	font-size: 1.6rem;
 	position: absolute;
 	left: 50%;

@@ -34,14 +34,16 @@ const unsubscribe = store.subscribe(() => {
 });
 store.dispatch(
 	addTodo({
-		description: "Buy Philippe's food",
-		createdAt: moment(),
+		title: "Buy Philippe's food",
+		start: new Date(),
+		end: new Date(),
 	}),
 );
 store.dispatch(
 	addTodo({
-		description: 'Do groceries',
-		createdAt: moment(),
+		title: 'Do groceries',
+		start: new Date(),
+		end: new Date(),
 	}),
 );
 

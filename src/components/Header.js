@@ -69,7 +69,7 @@ const Header = () => {
 					Month
 				</NavItem>
 				<NavItem to="/today">Day</NavItem>
-				<NavItem to="/createTodos" className="ion-plus" />
+				<NavItem to="/createTodos">&#43;</NavItem>
 				{/* <NavItem to="/createList">Create list</NavItem> */}
 			</Nav>
 		</HeaderTag>

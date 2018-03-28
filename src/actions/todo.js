@@ -1,13 +1,18 @@
 import uuid from 'uuid';
 
 // add todo
-export const addTodo = ({ description = '', createdAt = undefined } = {}) => ({
+export const addTodo = ({
+	title = '',
+	start = undefined,
+	end = undefined,
+} = {}) => ({
 	type: 'ADD_TODO',
 	todo: {
-		description,
-		createdAt,
-		list: [],
 		id: uuid(),
+		title,
+		start,
+		end,
+		list: [],
 	},
 });
 
