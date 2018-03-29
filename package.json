@@ -5,6 +5,7 @@
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.4",
     "@fortawesome/react-fontawesome": "^0.0.18",
+    "express": "^4.16.3",
     "moment": "^2.21.0",
     "numeral": "^2.0.6",
     "rc-time-picker": "^3.3.1",
