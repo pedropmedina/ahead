@@ -9,6 +9,14 @@ import configureStore from './store/configureStore';
 import moment from 'moment';
 import { injectGlobal } from 'styled-components';
 
+/*
+TODO: check how to configure redux to use hot reloading
+// enable hot module realod HRM
+if (module.hot) {
+	module.hot.accept();
+}
+*/
+
 injectGlobal`
 	html {
 		font-size: 62.5%;

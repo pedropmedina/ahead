@@ -1,8 +1,8 @@
 // handle validation at form level on submit
-const validate = (description, createdAt) => {
+const validate = (title, start) => {
 	const errors = {};
-	if (!description) errors.description = 'Provide description';
-	if (!createdAt) errors.createdAt = 'Pick a date for your todo';
+	if (!title) errors.title = 'Provide description';
+	if (!start) errors.start = 'Pick a date for your todo';
 	return errors;
 };
 

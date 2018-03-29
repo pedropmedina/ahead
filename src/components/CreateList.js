@@ -44,7 +44,7 @@ const Form = styled.form`
 		background-color: #aaa;
 		color: #fff;
 		font-weight: 500;
-		font-size: 3rem;
+		font-size: 2rem;
 		padding: 0 3rem;
 	}
 `;
@@ -82,7 +82,7 @@ class CreateList extends React.Component {
 						placeholder="item"
 						onChange={this.onItemDescriptionChange}
 					/>
-					<button onClick={this.onSubmit} className="ion-plus-circled" />
+					<button onClick={this.onSubmit} className="far fa-plus-square" />
 				</Form>
 				<List id={this.props.match.params.id} push={this.props.history.push} />
 			</MainWrapper>
